@@ -37,6 +37,11 @@ namespace HandAndFoot.Core
                 throw new WildNaturalBalanceException();
             }
 
+            if (wilds.Any() && cards.Count() > 7)
+            {
+                throw new InvalidOperationException("A completed dirty book can only contain 7 cards.");
+            }
+
             if (naturals.Select(c => c.Rank).Distinct().Count() != 1)
             {
                 throw new ArgumentOutOfRangeException(nameof(cards), "There must be at only one rank among the natural cards in a book.");

@@ -37,8 +37,8 @@ namespace HandAndFoot.Core
                         DrawPile.Add(new Card(rank, suit));
                     }
                 }
-                DrawPile.Add(new Card(Rank.JOKER, Suit.HEARTS));
-                DrawPile.Add(new Card(Rank.JOKER, Suit.HEARTS));
+                DrawPile.Add(Card.Joker());
+                DrawPile.Add(Card.Joker());
             }
 
             Shuffle(DrawPile);
@@ -79,8 +79,8 @@ namespace HandAndFoot.Core
                         DrawPile.Add(new Card(rank, suit));
                     }
                 }
-                DrawPile.Add(new Card(Rank.JOKER, Suit.HEARTS));
-                DrawPile.Add(new Card(Rank.JOKER, Suit.HEARTS));
+                DrawPile.Add(Card.Joker());
+                DrawPile.Add(Card.Joker());
             }
 
             Shuffle(DrawPile);

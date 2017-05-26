@@ -23,6 +23,11 @@ namespace HandAndFoot.Core
             Suit = s;
         }
 
+        public static Card Joker()
+        {
+            return new Card(Rank.JOKER, Suit.HEARTS);
+        }
+
         public int Points()
         {
             switch (Rank)
