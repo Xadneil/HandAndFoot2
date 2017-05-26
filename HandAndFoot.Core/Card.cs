@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace HandAndFoot.Core
 {
+    [Serializable]
     public struct Card
     {
         public readonly Rank Rank;

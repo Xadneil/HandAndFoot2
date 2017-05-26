@@ -14,7 +14,7 @@ namespace HandAndFoot.Core
         public int[] TeamPoints;
         private int cardsPerHand, decks;
 
-        public Game(int teams, int playersPerTeam, int cardsPerHand, int decks)
+        public Game(int teams, int playersPerTeam, int cardsPerHand, int decks, string[][] names)
         {
             this.cardsPerHand = cardsPerHand;
             this.decks = decks;
@@ -22,7 +22,7 @@ namespace HandAndFoot.Core
             TeamPoints = new int[teams];
             for (int i = 0; i < teams; i++)
             {
-                Teams[i] = new Team(playersPerTeam);
+                Teams[i] = new Team(playersPerTeam, names[i]);
                 TeamPoints[i] = 0;
             }
 

@@ -12,12 +12,12 @@ namespace HandAndFoot.Core
         public Player[] Players;
         private List<Book> books;
 
-        public Team(int playersPerTeam)
+        public Team(int playersPerTeam, IList<string> names)
         {
             Players = new Player[playersPerTeam];
             for (int i = 0; i < playersPerTeam; i++)
             {
-                Players[i] = new Player();
+                Players[i] = new Player(names[i]);
             }
             books = new List<Book>();
         }

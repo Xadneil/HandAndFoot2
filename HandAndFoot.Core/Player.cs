@@ -9,6 +9,12 @@ namespace HandAndFoot.Core
     public class Player
     {
         private Hand hand, foot;
+        public readonly string Name;
+
+        public Player(string name)
+        {
+            Name = name;
+        }
 
         public Hand Hand
         {

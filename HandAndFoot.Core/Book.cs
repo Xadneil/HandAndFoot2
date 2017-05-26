@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace HandAndFoot.Core
 {
+    [Serializable]
     public class Book : ICollection<Card>
     {
         public readonly Rank Rank;
