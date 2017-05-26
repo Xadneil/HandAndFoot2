@@ -24,7 +24,7 @@ namespace HandAndFoot.Core
 
         public Book(IEnumerable<Card> cards)
         {
-            if (cards == null || !cards.Any())
+            if (cards == null || cards.Count() < 3)
             {
                 throw new ArgumentNullException(nameof(cards), "There must be at least three cards in a book.");
             }
