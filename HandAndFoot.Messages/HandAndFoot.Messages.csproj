@@ -43,14 +43,17 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ToClient\CurrentTurn.cs" />
     <Compile Include="ToClient\DealCards.cs" />
-    <Compile Include="ToClient\DrawSevenCards.cs" />
+    <Compile Include="ToClient\DrawSixCards.cs" />
     <Compile Include="ToClient\DrawTwoCards.cs" />
     <Compile Include="ToClient\NewDiscard.cs" />
     <Compile Include="ToClient\UpdateTeam.cs" />
+    <Compile Include="ToServer\Discard.cs" />
+    <Compile Include="ToServer\DrawSevenCards.cs" />
+    <Compile Include="ToServer\DrawTwoCards.cs" />
+    <Compile Include="ToServer\PlayBook.cs" />
+    <Compile Include="ToServer\PlayCard.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ToServer\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\HandAndFoot.Core\HandAndFoot.Core.csproj">
       <Project>{9a483366-fc76-4348-af55-36da58be50a3}</Project>
