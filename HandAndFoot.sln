@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HandAndFoot.Core.Test", "Ha
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HandAndFoot.Messages", "HandAndFoot.Messages\HandAndFoot.Messages.csproj", "{64C44703-645D-4FB4-BE07-9BA8ED8A6F9C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HandAndFoot.Server.Test", "HandAndFoot.Server.Test\HandAndFoot.Server.Test.csproj", "{695E1739-60E1-42D2-A410-78ED8244C79D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{64C44703-645D-4FB4-BE07-9BA8ED8A6F9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{64C44703-645D-4FB4-BE07-9BA8ED8A6F9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{64C44703-645D-4FB4-BE07-9BA8ED8A6F9C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{695E1739-60E1-42D2-A410-78ED8244C79D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{695E1739-60E1-42D2-A410-78ED8244C79D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{695E1739-60E1-42D2-A410-78ED8244C79D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{695E1739-60E1-42D2-A410-78ED8244C79D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
