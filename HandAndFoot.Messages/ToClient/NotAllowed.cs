@@ -7,15 +7,13 @@ using System.Threading.Tasks;
 namespace HandAndFoot.Messages.ToClient
 {
     [Serializable]
-    public class CurrentTurn : IClientMessage
+    public class NotAllowed : IClientMessage
     {
-        public string Name;
-        public bool MyTurn;
+        public string Reason;
 
-        public CurrentTurn(string name, bool myTurn)
+        public NotAllowed(string reason)
         {
-            Name = name;
-            MyTurn = myTurn;
+            Reason = reason;
         }
     }
 }

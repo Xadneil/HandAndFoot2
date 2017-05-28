@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace HandAndFoot.Messages.ToServer
 {
     [Serializable]
-    public class PlayCard
+    public class PlayCard : IServerMessage
     {
         public Card Card;
         public int BookId;

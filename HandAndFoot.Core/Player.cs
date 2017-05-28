@@ -10,10 +10,14 @@ namespace HandAndFoot.Core
     {
         private Hand hand, foot;
         public readonly string Name;
+        public int PlayerId;
+        public Team Team;
 
-        public Player(string name)
+        public Player(string name, Team team, int teamId, int numTeams, int playerId)
         {
             Name = name;
+            Team = team;
+            PlayerId = teamId + playerId * numTeams;
         }
 
         public Hand Hand

@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 namespace HandAndFoot.Messages.ToClient
 {
     [Serializable]
-    public class UpdateTeam
+    public class UpdateTeam : IClientMessage
     {
         public bool MyTeam;
-        public List<Book> Books;
+        public Book[] Books;
 
-        public UpdateTeam(bool myTeam, List<Book> books)
+        public UpdateTeam(bool myTeam, Book[] books)
         {
             MyTeam = myTeam;
             Books = books;

@@ -22,7 +22,7 @@ namespace HandAndFoot.Core
             TeamPoints = new int[teams];
             for (int i = 0; i < teams; i++)
             {
-                Teams[i] = new Team(playersPerTeam, names[i]);
+                Teams[i] = new Team(playersPerTeam, names[i], i, teams);
                 TeamPoints[i] = 0;
             }
 
@@ -96,14 +96,11 @@ namespace HandAndFoot.Core
             }
         }
 
-        public void PlayOnBook(Player player, IEnumerable<Card> cards, Book book)
+        public void PlayOnBook(Player player, Card card, Book book)
         {
-            foreach (var card in cards)
-            {
-                if (!player.Hand.Remove(card))
-                    throw new InvalidOperationException($"The player does not have the reported card ({card.Rank + (card.Rank == Rank.JOKER ? "" : (" of " + card.Suit))}) in their hand.");
-                book.Add(card);
-            }
+            if (!player.Hand.Remove(card))
+                throw new InvalidOperationException($"The player does not have the reported card ({card.Rank + (card.Rank == Rank.JOKER ? "" : (" of " + card.Suit))}) in their hand.");
+            book.Add(card);
         }
 
         public void PlayNewBook(Team team, Player player, Book book)
@@ -116,8 +113,9 @@ namespace HandAndFoot.Core
             team.Add(book);
         }
 
-        public void DrawTwoCards(Player player)
+        public Card[] DrawTwoCards(Player player)
         {
+            Card[] ret = new Card[2];
             for (int i = 0; i < 2; i++)
             {
                 if (!DrawPile.Any())
@@ -136,10 +134,12 @@ namespace HandAndFoot.Core
                 var card = DrawPile[DrawPile.Count - 1];
                 DrawPile.RemoveAt(DrawPile.Count - 1);
                 player.Hand.Add(card);
+                ret[i] = card;
             }
+            return ret;
         }
 
-        public void DrawSevenCardsFromDiscardAndPlayNewBook(Team team, Player player, Card card1, Card card2)
+        public Card[] DrawSevenCardsFromDiscardAndPlayNewBook(Team team, Player player, Card card1, Card card2)
         {
             if (DiscardPile.Count < 7)
                 throw new InvalidOperationException("There are not enough cards in the discard pile. It must have 7 cards.");
@@ -149,6 +149,7 @@ namespace HandAndFoot.Core
             if (!player.Hand.Remove(card2))
                 throw new InvalidOperationException($"The player does not have the reported card ({card2.Rank + (card2.Rank == Rank.JOKER ? "" : (" of " + card2.Suit))}) in their hand.");
 
+            Card[] ret = new Card[6];
             Card topDiscard = DiscardPile[DiscardPile.Count - 1];
 
             for (int i = 0; i < 7; i++)
@@ -156,10 +157,14 @@ namespace HandAndFoot.Core
                 var card = DiscardPile[DiscardPile.Count - 1];
                 DiscardPile.RemoveAt(DiscardPile.Count - 1);
                 if (i > 0)
+                {
                     player.Hand.Add(card);
+                    ret[i - 1] = card;
+                }
             }
 
             team.Add(new Book(new Card[] { card1, card2, topDiscard }));
+            return ret;
         }
 
         public void Discard(Team team, Player player, Card card)

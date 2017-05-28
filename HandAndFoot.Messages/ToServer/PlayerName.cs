@@ -7,7 +7,13 @@ using System.Threading.Tasks;
 namespace HandAndFoot.Messages.ToServer
 {
     [Serializable]
-    public class DrawTwoCards : IServerMessage
+    public class PlayerName
     {
+        public string Name;
+
+        public PlayerName(string name)
+        {
+            Name = name;
+        }
     }
 }

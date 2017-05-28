@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace HandAndFoot.Messages.ToServer
 {
     [Serializable]
-    public class Discard
+    public class Discard : IServerMessage
     {
         public Card Card;
 

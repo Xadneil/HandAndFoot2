@@ -7,15 +7,13 @@ using System.Threading.Tasks;
 namespace HandAndFoot.Messages.ToClient
 {
     [Serializable]
-    public class CurrentTurn : IClientMessage
+    public class LobbyAnnouncePlayer : IClientMessage
     {
         public string Name;
-        public bool MyTurn;
 
-        public CurrentTurn(string name, bool myTurn)
+        public LobbyAnnouncePlayer(string name)
         {
             Name = name;
-            MyTurn = myTurn;
         }
     }
 }

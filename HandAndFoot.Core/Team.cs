@@ -7,17 +7,19 @@ using System.Threading.Tasks;
 
 namespace HandAndFoot.Core
 {
-    public class Team : ICollection<Book>
+    public class Team : IList<Book>
     {
         public Player[] Players;
         private List<Book> books;
+        public int TeamId;
 
-        public Team(int playersPerTeam, IList<string> names)
+        public Team(int playersPerTeam, IList<string> names, int teamId, int numTeams)
         {
+            TeamId = teamId;
             Players = new Player[playersPerTeam];
             for (int i = 0; i < playersPerTeam; i++)
             {
-                Players[i] = new Player(names[i]);
+                Players[i] = new Player(names[i], this, TeamId, numTeams, i);
             }
             books = new List<Book>();
         }
@@ -35,6 +37,19 @@ namespace HandAndFoot.Core
             get
             {
                 return false;
+            }
+        }
+
+        public Book this[int index]
+        {
+            get
+            {
+                return books[index];
+            }
+
+            set
+            {
+                throw new NotImplementedException();
             }
         }
 
@@ -71,6 +86,21 @@ namespace HandAndFoot.Core
         IEnumerator IEnumerable.GetEnumerator()
         {
             return books.GetEnumerator();
+        }
+
+        public int IndexOf(Book item)
+        {
+            return books.IndexOf(item);
+        }
+
+        public void Insert(int index, Book item)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void RemoveAt(int index)
+        {
+            throw new NotImplementedException();
         }
     }
 }

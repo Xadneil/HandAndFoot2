@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HandAndFoot.Messages.ToServer
+namespace HandAndFoot.Messages.ToClient
 {
-    [Serializable]
-    public class DrawTwoCards : IServerMessage
+    public interface IClientMessage
     {
     }
 }

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace HandAndFoot.Messages.ToClient
 {
     [Serializable]
-    public class DealCards
+    public class DealCards : IClientMessage
     {
         public List<Card> Cards;
 

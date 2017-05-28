@@ -6,8 +6,7 @@ using System.Threading.Tasks;
 
 namespace HandAndFoot.Messages.ToServer
 {
-    [Serializable]
-    public class DrawTwoCards : IServerMessage
+    public interface IServerMessage
     {
     }
 }
