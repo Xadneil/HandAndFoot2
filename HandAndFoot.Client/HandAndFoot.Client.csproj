@@ -58,8 +58,23 @@
     <Compile Include="HandAndFoot.Designer.cs">
       <DependentUpon>HandAndFoot.cs</DependentUpon>
     </Compile>
+    <Compile Include="NativeMethods.cs" />
+    <Compile Include="PlayerState.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="NameControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="NameControl.Designer.cs">
+      <DependentUpon>NameControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ServerConnectControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ServerConnectControl.Designer.cs">
+      <DependentUpon>ServerConnectControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TextBoxExtensions.cs" />
     <EmbeddedResource Include="CardControl.resx">
       <DependentUpon>CardControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -76,6 +91,12 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="NameControl.resx">
+      <DependentUpon>NameControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ServerConnectControl.resx">
+      <DependentUpon>ServerConnectControl.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
