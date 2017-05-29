@@ -7,6 +7,7 @@ using System.Drawing;
 using System.Linq;
 using System.Net.Sockets;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -40,17 +41,23 @@ namespace HandAndFoot.Client
 
             currentState = PlayerState.ENTER_NAME;
             nameControl = new NameControl(stream);
-            nameControl.Completed += Name_Completed;
             Controls.Add(nameControl);
             Center(nameControl);
         }
 
-        private void Name_Completed(string name)
+        private void OnReceiveGameDetails(LobbyGameDetails details)
         {
-            Controls.Remove(nameControl);
-            nameControl.Dispose();
-            nameControl = null;
-            playerName = name;
+            if (currentState == PlayerState.ENTER_NAME && nameControl != null)
+            {
+                var name = nameControl.NameAccepted();
+                Controls.Remove(nameControl);
+                nameControl.Dispose();
+                nameControl = null;
+                playerName = name;
+
+                currentState = PlayerState.CHOOSE_TEAM;
+                // create and display team choosing control
+            }
         }
 
         protected override void OnResize(EventArgs e)
@@ -72,7 +79,31 @@ namespace HandAndFoot.Client
             c.Location = new Point((Width - c.Width) / 2, (Height - c.Height) / 2);
         }
 
-        public void ReceiveMessage(object message)
+        private void ReceiveMessages()
+        {
+            var worker = new BackgroundWorker();
+            worker.DoWork += (sender, e) =>
+            {
+                if (Thread.CurrentThread.Name == null)
+                    Thread.CurrentThread.Name = "ClientSocketReceiver";
+                var formatter = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
+                e.Result = formatter.Deserialize(stream);
+            };
+            worker.RunWorkerCompleted += (sender, e) =>
+            {
+                if (e.Error != null)
+                {
+                    MessageBox.Show(this, e.Error.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    Environment.Exit(0);
+                }
+                HandleMessage(e.Result);
+                worker.RunWorkerAsync();
+            };
+
+            worker.RunWorkerAsync();
+        }
+
+        private void HandleMessage(object message)
         {
             if (message is NotAllowed)
             {
@@ -84,11 +115,43 @@ namespace HandAndFoot.Client
                         break;
                 }
             }
-            //else if (message is LobbyGameDetails)
-            //{
-            //    var gameDetails = message as LobbyGameDetails;
-
-            //}
+            else if (message is LobbyGameDetails)
+            {
+                var gameDetails = message as LobbyGameDetails;
+                OnReceiveGameDetails(gameDetails);
+            }
+            else if (message is LobbyAnnouncePlayer)
+            {
+                var announcePlayer = message as LobbyAnnouncePlayer;
+            }
+            else if (message is LobbyPlayerChoseTeam)
+            {
+                var playerChoseTeam = message as LobbyPlayerChoseTeam;
+            }
+            else if (message is CurrentTurn)
+            {
+                var currentTurn = message as CurrentTurn;
+            }
+            else if (message is DealCards)
+            {
+                var dealCards = message as DealCards;
+            }
+            else if (message is DrawSixCards)
+            {
+                var drawSixCards = message as DrawSixCards;
+            }
+            else if (message is DrawTwoCards)
+            {
+                var drawTwoCards = message as DrawTwoCards;
+            }
+            else if (message is NewDiscard)
+            {
+                var newDiscard = message as NewDiscard;
+            }
+            else if (message is UpdateTeam)
+            {
+                var updateTeam = message as UpdateTeam;
+            }
         }
     }
 }

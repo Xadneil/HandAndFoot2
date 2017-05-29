@@ -9,7 +9,6 @@ namespace HandAndFoot.Client
 {
     public partial class NameControl : UserControl
     {
-        public event Action<string> Completed;
         NetworkStream stream;
 
         public NameControl(NetworkStream stream)
@@ -49,16 +48,18 @@ namespace HandAndFoot.Client
             if (e.Error != null)
             {
                 Error(e.Error);
-                return;
             }
+        }
 
+        public string NameAccepted()
+        {
             Settings.Default.PreviousName = txtName.Text.Trim();
             Settings.Default.Save();
 
             btnSubmit.Text = "Submit";
             btnSubmit.Enabled = txtName.Enabled = true;
 
-            Completed?.Invoke(txtName.Text.Trim());
+            return txtName.Text.Trim();
         }
 
         public void Error(Exception e)

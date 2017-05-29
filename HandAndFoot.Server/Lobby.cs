@@ -50,7 +50,20 @@ namespace HandAndFoot.Server
             others[playerId] = ret;
             ret.Stream = stream;
             ret.PlayerId = playerId;
-            var name = formatter.Deserialize(stream) as PlayerName;
+            PlayerName name;
+            bool nameOK = false;
+            do
+            {
+                name = formatter.Deserialize(stream) as PlayerName;
+                if (others.Any(p => p.Name != null && p.Name == name.Name))
+                {
+                    formatter.Serialize(stream, new NotAllowed("That name is already taken."));
+                }
+                else
+                {
+                    nameOK = true;
+                }
+            } while (!nameOK);
             ret.Name = name.Name;
 
             string[][] playerAllocation = new string[teams + 1][];
