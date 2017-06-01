@@ -49,6 +49,7 @@
     <Compile Include="ToClient\IClientMessage.cs" />
     <Compile Include="ToClient\LobbyAnnouncePlayer.cs" />
     <Compile Include="ToClient\LobbyPlayerChoseTeam.cs" />
+    <Compile Include="ToClient\LobbyTeamOK.cs" />
     <Compile Include="ToClient\NewDiscard.cs" />
     <Compile Include="ToClient\NotAllowed.cs" />
     <Compile Include="ToClient\UpdateTeam.cs" />

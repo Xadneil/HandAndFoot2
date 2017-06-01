@@ -18,6 +18,7 @@ namespace HandAndFoot.Client
         PlayerState currentState;
         ServerConnectControl serverConnectControl;
         NameControl nameControl;
+        ChooseTeamControl chooseTeamControl;
         NetworkStream stream;
         string playerName;
 
@@ -56,7 +57,29 @@ namespace HandAndFoot.Client
                 playerName = name;
 
                 currentState = PlayerState.CHOOSE_TEAM;
-                // create and display team choosing control
+                chooseTeamControl = new ChooseTeamControl(details, stream);
+                Controls.Add(chooseTeamControl);
+                Center(chooseTeamControl);
+            }
+        }
+
+        private void OnReceiveTeamOK(LobbyTeamOK teamOK)
+        {
+            if (currentState == PlayerState.CHOOSE_TEAM && chooseTeamControl != null)
+            {
+                Controls.Remove(chooseTeamControl);
+                chooseTeamControl.Dispose();
+                chooseTeamControl = null;
+
+                currentState = PlayerState.WAIT_FOR_START;
+                if (teamOK.ReadyToStart)
+                {
+                    // do not display waiting message becuase game is starting immediately
+                }
+                else
+                {
+                    // display waiting message and wait for DealCards message
+                }
             }
         }
 
@@ -71,6 +94,10 @@ namespace HandAndFoot.Client
             else if (currentState == PlayerState.ENTER_NAME && nameControl != null)
             {
                 Center(nameControl);
+            }
+            else if (currentState == PlayerState.CHOOSE_TEAM && chooseTeamControl != null)
+            {
+                Center(chooseTeamControl);
             }
         }
 
@@ -113,12 +140,20 @@ namespace HandAndFoot.Client
                     case PlayerState.ENTER_NAME:
                         nameControl?.Error(new Exception(notAllowed.Reason));
                         break;
+                    case PlayerState.CHOOSE_TEAM:
+                        chooseTeamControl?.Error(new Exception(notAllowed.Reason));
+                        break;
                 }
             }
             else if (message is LobbyGameDetails)
             {
                 var gameDetails = message as LobbyGameDetails;
                 OnReceiveGameDetails(gameDetails);
+            }
+            else if (message is LobbyTeamOK)
+            {
+                var teamOK = message as LobbyTeamOK;
+                OnReceiveTeamOK(teamOK);
             }
             else if (message is LobbyAnnouncePlayer)
             {

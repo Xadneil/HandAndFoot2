@@ -52,6 +52,12 @@
     <Compile Include="UserControls\CardControl.Designer.cs">
       <DependentUpon>CardControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\ChooseTeamControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\ChooseTeamControl.Designer.cs">
+      <DependentUpon>ChooseTeamControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="HandAndFoot.cs">
       <SubType>Form</SubType>
     </Compile>

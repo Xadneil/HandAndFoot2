@@ -75,13 +75,40 @@ namespace HandAndFoot.Server
             playerAllocation[teams] = unteamedPlayers;
 
             formatter.Serialize(stream, new LobbyGameDetails(teams, playersPerTeam, playerAllocation));
-            var selectedTeam = formatter.Deserialize(stream) as SelectTeam;
-            ret.Team = selectedTeam.Team;
 
             foreach (var pref in others.Where(p => p != null && p.Stream != null))
             {
                 if (pref.PlayerId != playerId)
-                    formatter.Serialize(pref.Stream, new LobbyPlayerChoseTeam(name.Name, selectedTeam.Team));
+                    formatter.Serialize(pref.Stream, new LobbyPlayerChoseTeam(name.Name, -1));
+            }
+
+            SelectTeam selectedTeam;
+            bool teamOK = false;
+            do
+            {
+                selectedTeam = formatter.Deserialize(stream) as SelectTeam;
+                teamOK = others.Where(p => p != null && p.Stream != null && p.Team == selectedTeam.Team).Count() + 1 <= playersPerTeam;
+                if (!teamOK)
+                {
+                    formatter.Serialize(stream, new NotAllowed("That team is full. Choose another one."));
+                }
+            } while (!teamOK);
+            ret.Team = selectedTeam.Team;
+
+            if (others.All(o => o.Name != null && o.Stream != null && o.Team != null))
+            {
+                // Everyone is ready, so do not send LobbyPlayerChoseTeam because no-one is listening.
+                formatter.Serialize(stream, new LobbyTeamOK(readyToStart: true));
+            }
+            else
+            {
+                formatter.Serialize(stream, new LobbyTeamOK());
+
+                foreach (var pref in others.Where(p => p != null && p.Stream != null))
+                {
+                    if (pref.PlayerId != playerId)
+                        formatter.Serialize(pref.Stream, new LobbyPlayerChoseTeam(name.Name, selectedTeam.Team));
+                }
             }
         }
     }

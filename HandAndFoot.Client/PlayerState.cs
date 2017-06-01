@@ -11,6 +11,7 @@ namespace HandAndFoot.Client
         CONNECTING,
         ENTER_NAME,
         CHOOSE_TEAM,
+        WAIT_FOR_START,
         MY_TURN,
         NOT_MY_TURN,
         GAME_OVER
