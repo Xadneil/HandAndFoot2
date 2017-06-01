@@ -46,10 +46,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CardControl.cs">
+    <Compile Include="UserControls\CardControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="CardControl.Designer.cs">
+    <Compile Include="UserControls\CardControl.Designer.cs">
       <DependentUpon>CardControl.cs</DependentUpon>
     </Compile>
     <Compile Include="HandAndFoot.cs">
@@ -62,20 +62,20 @@
     <Compile Include="PlayerState.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="NameControl.cs">
+    <Compile Include="UserControls\NameControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="NameControl.Designer.cs">
+    <Compile Include="UserControls\NameControl.Designer.cs">
       <DependentUpon>NameControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="ServerConnectControl.cs">
+    <Compile Include="UserControls\ServerConnectControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="ServerConnectControl.Designer.cs">
+    <Compile Include="UserControls\ServerConnectControl.Designer.cs">
       <DependentUpon>ServerConnectControl.cs</DependentUpon>
     </Compile>
     <Compile Include="TextBoxExtensions.cs" />
-    <EmbeddedResource Include="CardControl.resx">
+    <EmbeddedResource Include="UserControls\CardControl.resx">
       <DependentUpon>CardControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="HandAndFoot.resx">
@@ -91,10 +91,13 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="NameControl.resx">
+    <EmbeddedResource Include="UserControls\ChooseTeamControl.resx">
+      <DependentUpon>ChooseTeamControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\NameControl.resx">
       <DependentUpon>NameControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ServerConnectControl.resx">
+    <EmbeddedResource Include="UserControls\ServerConnectControl.resx">
       <DependentUpon>ServerConnectControl.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
